@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--title><%= siteName %></title-->
+  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Liste Annonces Immobili&egrave;res</title>
+
+  <!--- bootstrap --->
+  <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
+
+  <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="javascript:"><%= siteName %></a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class='-col-sm-12'>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-primary text-center" style="text-transform: uppercase;">Liste des annonces immobili&egrave;res</h2>
+          </div>
+          <div class="panel-body">
+            <form class="form-horizontal" role="form">
+              <%if (typeof posts != 'undefined') { %>
+                <table class = "table table-bordered table-condensed">
+                  <thead style="font-weight: bold; font-size:14px;">
+                      <tr>
+                        <th>NO</th>
+                        <th>Titre</th>
+                        <th>Prix</th>
+                        <th>Date</th>
+                        <th>Surface</th>
+                        <th>Type</th>
+                        <th>Classe</th>
+                        <th>Equipement</th>
+                        <th>Annonce</th>
+                        <th>Images</th>
+                        <th>created</th>
+                        <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  <% i = 1 %>
+                  <% (posts).forEach(function(post){ %>
+                      <%if (typeof post != 'undefined') { %>
+                        <tr>
+                          <td><%= i++ %></td>
+                          <td><%= post.titre %></td>
+                          <td><%= post.prix %></td>
+                          <td><%= post.date %></td>
+                          <td><%= post.surface %></td>
+                          <td><%= post.type %></td>
+                          <td><%= post.classe %></td>
+                          <td><%= post.equipement %></td>
+                          <td><%= post.annonce %></td>
+                          <!--td><a href="#"><%= post.images %></a></td-->
+                          <td><div onload="loadImages()"></div></td>
+                          <td><%= post.created %></td>
+                          <td>
+                            <div class="form-group" style="text-align: center;">
+                              <div class="pager">
+                                <div class="col-sm-6">
+                                  <input type="submit" class="btn btn-success" value="Modifier">
+                                </div>
+                              </div>
+                              <div class="pager" style="text-align: center;">
+                                <div class="col-sm-6">
+                                  <input type="button" class="btn btn-danger" value="Supprimer" data-toggle="modal" data-target="#confirmer">
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                    <% } %>
+                  <% });%>
+                  </tbody>
+                </table>
+              <% } %>
+            </form>
+          </div>
+          <div class="panel-footer">
+            <div class="input-group">
+              <p class="text-muted ">Copyright &copy;
+                <a href="https://github.com/omar2000ye">Mohammed AL-AGEL</a>
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/js/script.js"></script>
+
+  <!-- List of images -->
+  <script type="text/javascript">
+    function loadImages() {
+      var n = document.getElementById("post.images");
+      document.getElementById("list-img").innerHTML = "<a href=" + n + ">post.images</a>";
+    }
+  </script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="confirmer" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Suppression d'une ligne</h4>
+        </div>
+        <div class="modal-body">
+          <p>Etes-vous s&ucirc;r de supprimer cette ligne?</p>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" data-dismiss="modal" value="Confirmer">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

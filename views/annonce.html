@@ -1,0 +1,275 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Formulaire Annonces Immobili&egrave;res</title>
+
+    <!--- Annonces css --->
+    <link rel="stylesheet" href="css/annonce.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!--- bootstrap --->
+    <script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="javascript:"><%= siteName %></a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class='col-sm-12'>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="text-primary text-center" style="text-transform: uppercase;">formulaire d'annonce immobili&egrave;re</h2>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal" method="post" action="/annonce" role="form">
+                <table class = "table table-hover">
+                  <tr>
+                    <td>
+                      <h4>Titre de l'annonce :</h4>
+                    </td>
+                    <td>
+                      <div class='col-sm-11'>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Titre de l'annonce" name="titre" required>
+                            <div class="asterisk_input input-group-addon"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Prix du bien :</h4>
+                    </td>
+                    <td>
+                      <div class='col-sm-6'>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="add-on input-group-addon">
+                              <span class="glyphicon glyphicon-euro"></span>
+                            </div>
+                            <input class="form-control" type="text" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="Prix du bien" name="prix" min="1" required>
+                            <div class="asterisk_input input-group-addon"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Date de disponibilit&eacute; du bien :</h4>
+                    </td>
+                    <td>
+                      <div class='col-sm-6'>
+                        <div class="form-group">
+                          <div class="input-group date" id="datetimepicker">
+                            <span class="add-on input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Date de disponibilit&eacute; du bien" name="date" required>
+                            <div class="asterisk_input input-group-addon"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Surface du bien :</h4>
+                    </td>
+                    <td>
+                      <div class='col-sm-6'>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="add-on input-group-addon">
+                              <span>M&sup2; </span>
+                            </span>
+                            <input class="form-control" type="text" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="Surface du bien" name="surface" required>
+                            <div class="asterisk_input input-group-addon"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Type du bien :</h4>
+                    </td>
+                    <td>
+                      <div class="row" style="text-align: center;">
+                        <div class="col-xs-4">
+                          <label class="panel panel-default">
+                            <div class="panel-heading">
+                              <i class="glyphicon glyphicon-list"></i>
+                              <span>Appartement</span>
+                              <input type="radio" name="type" value="Appartement">
+                            </div>
+                          </label>
+                        </div>
+                        <div class="col-xs-4">
+                          <label class="panel panel-default">
+                            <div class="panel-heading">
+                              <i class="glyphicon glyphicon-home"></i>
+                              <span>Maison</span>
+                              <input type="radio" name="type" value="Maison" class="selected">
+                            </div>
+                          </label>
+                        </div>
+                        <div class="col-xs-4">
+                          <label class="panel panel-default">
+                            <div class="panel-heading">
+                              <i class="glyphicon glyphicon-picture"></i>
+                              <span>Terrain</span>
+                              <input type="radio" name="type" value="Terrain" class="selected">
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Classe &eacute;nerg&eacute;tique :</h4>
+                      <img id="" src="/images/ETIQUETTE_dpe.gif" width="250" height="250">
+                    </td>
+                    <td>
+                      <div class='col-sm-6'>
+                        <div class="form-group">
+                          <select class="form-control" name="classe">
+                              <option value="null">--------------------------------Choisissez--------------------------------</option>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                              <option value="D">D</option>
+                              <option value="E">E</option>
+                              <option value="F">F</option>
+                              <option value="G">G</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Equipements :</h4>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="equipement" value="Cave">
+                      <span>Cave</span>
+                      <input type="checkbox" name="equipement" value="Garage">
+                      <span>Garage</span>
+                      <input type="checkbox" name="equipement" value="Terrasse">
+                      <span>Terrasse</span>
+                      <input type="checkbox" name="equipement" value="Jacuzzi">
+                      <span>Jacuzzi</span>
+                      <input type="checkbox" name="equipement" value="Piscine">
+                      <span>Piscine</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>Texte de l'annonce :</h4>
+                    </td>
+                    <td>
+                      <div class='col-sm-11'>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="10" name="annonce"></textarea>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: middle;">
+                      <h4>Les photos :</h4>
+                      <div class="pager col-sm-6">
+                        <span class="btn btn-primary btn-file">
+                          Choisissez votre photo <input type="file" accept="image/*" name="images" onchange="readURL(this);">
+                        </span>
+                      </div>
+                    </td>
+                    <div class="center-block">
+                    <td id="img-list" align="center"></td>
+                  </div>
+                  </tr>
+                </table>
+
+                <!-- Form buttons -->
+                <div class="form-group" style="text-align: center;">
+                  <div class="pager col-sm-6">
+                    <input type="submit" class="btn btn-success btn-lg" value="Envoyer">
+                  </div>
+                  <div class="pager col-sm-6" style="text-align: center;">
+                    <input type="reset" class="btn btn-danger btn-lg" value="Annuler" onclick="removeImage();">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer">
+              <div class="input-group">
+                <p class="text-muted ">Copyright &copy;
+                  <a href="https://github.com/omar2000ye">Mohammed AL-AGEL</a>
+                  <span class="glyphicon glyphicon-thumbs-up"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+  /* datepicker */
+  $(function () {
+                $('#datetimepicker').datetimepicker({
+                  format: 'DD.MM.YYYY',
+                });
+            });
+
+  /* add images */
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+           var image = document.createElement("img");
+           image.src = e.target.result;
+           document.getElementById("img-list").appendChild(image);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  /* remove images */
+  function removeImage() {
+    var elem = document.getElementById("img-list");
+    while(elem.hasChildNodes())
+    {
+      elem.removeChild(elem.childNodes[0]);
+    }
+  }
+
+  $('#submit_form').submit(function(){
+     var vals = $('.validate').val()
+     if (!vals)
+        {
+          console.log('Error exists');
+          $('.validate').css({ "border": '#FF0000 1px solid'});
+          $('.validate').val('enter a value');
+        }
+  });
+</script>
